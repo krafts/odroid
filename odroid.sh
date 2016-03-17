@@ -3,16 +3,18 @@
 ## https://unix.stackexchange.com/questions/226872/how-to-shrink-root-filesystem-without-booting-a-livecd/227318#227318
 
 usage() {
-    echo "$0 <partition> <size>"
+    echo "$0 <device> <device_partition> <size>"
+    echo "$0 /dev/mmcblk0 /dev/mmcblk0p2 1G"
 }
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 3 ]; then
     usage
     exit -1
 fi
 
-device_partition="$1"
-size="$2"
+device="$1"
+device_partition="$2"
+size="$3"
 
 umount -a
 mount | column -t
@@ -64,3 +66,4 @@ mount --make-rshared /
 
 
 ## TODO: add fisk commands here
+## echo -e "d\n2\nn\n2\n\n1G\nw" | fdisk $device  ## this needs to be verified, writing down from memory
