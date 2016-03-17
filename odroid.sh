@@ -61,3 +61,6 @@ mount -a
 
 systemctl | grep failed | awk "{print $1}"| while read i; do systemctl restart "$i"; done;
 mount --make-rshared /
+
+
+## TODO: add fisk commands here
